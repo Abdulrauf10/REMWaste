@@ -2,6 +2,8 @@ import { useState } from "react"
 import SpotlightCard from "./components/SpotlightCard"
 import { useFetchApi } from "./hook/api/useFetchApi"
 import Footer from "./components/Footer"
+import Box from "@mui/material/Box"
+import LinearProgress from "@mui/material/LinearProgress"
 
 function App() {
   const [isSelected, setIsSelected] = useState<number>()
@@ -18,21 +20,29 @@ function App() {
         Select the skip size that best suits your needs
       </p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 w-full max-w-5xl mb-[160px]">
-        {dataLocation?.map((data: any, idx: number) => (
-          <SpotlightCard
-            key={data?.id ?? idx}
-            isSelected={isSelected === data?.id}
-            onClick={() => {
-              setIsSelected(data?.id)
-              setDataSelected(data)
-            }}
-            image="/container.jpg"
-            isDisable={!data?.allows_heavy_waste}
-            data={data}
-          />
-        ))}
-      </div>
+      {isLoading ? (
+        <div className="w-full flex justify-center min-h-[100vh] items-center">
+          <Box sx={{ width: "70%" }}>
+            <LinearProgress />
+          </Box>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 w-full max-w-5xl mb-[160px]">
+          {dataLocation?.map((data: any, idx: number) => (
+            <SpotlightCard
+              key={data?.id ?? idx}
+              isSelected={isSelected === data?.id}
+              onClick={() => {
+                setIsSelected(data?.id)
+                setDataSelected(data)
+              }}
+              image="/container.jpg"
+              isDisable={!data?.allows_heavy_waste}
+              data={data}
+            />
+          ))}
+        </div>
+      )}
 
       {isSelected && <Footer data={dataSelected} />}
     </div>
