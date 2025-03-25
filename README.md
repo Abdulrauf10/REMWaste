@@ -1,8 +1,8 @@
 # This project uses React 19 (experimental) with Vite, Tailwind CSS, and Material UI.
 
-## Design Approach Keep the main background consistent.
+## Design Approach
 
-- Keep the main background color
+- Keep the main background consistent.
 - Choose color palettes that suit the main background for cards and typography.
 
 ## Functionality
